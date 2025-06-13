@@ -2,10 +2,14 @@ import express from "express"
 import mysql from "mysql"
 import cors from "cors"
 
+//using express
 const app = express()
 app.use(express.json())
+
+// using cors so that the frontend ccan fetch data from the backend
 app.use(cors())
 
+// using mysql data connection 
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -61,7 +65,40 @@ app.delete("/api/student/:StudentID", (req, res) => {
     })
 
 })
+
+// making a update/put request
+/* app.put("/api/students/:StudentID", (req,res) => {
+    const studentID = req.params.StudentID;
+    const q = "UPDATE student SET `StudentID` = ?, `StudentName` = ?, `StudentEmail` = ?, `StudentCourse` = ? WHERE StudentID = ?"
+
+    const values = [
+        req.body.StudentID,
+        req.body.StudentName,
+        req.body.StudentEmail,
+        req.body.StudentCourse,
+    ]
+
+    db.query(q, [...values, studentID], (err,data) => {
+        if(err) return res.json(err);
+        return res.json("Book has been updated successfulls")
+    })
+}) */
   
+    app.put("/api/student/:StudentID", (req,res) => {
+        const StudentID = req.params.StudentID;
+        const q = "UPDATE student SET `StudentID` = ?, `StudentName` = ?, `StudentEmail` = ?, `StudentCourse` = ? WHERE StudentID = ?"
+        const values = [
+            req.body.StudentID,
+            req.body.StudentName,
+            req.body.StudentEmail,
+            req.body.StudentCourse,
+        ]
+        db.query(q, [...values, StudentID], (err,data) => {
+            if(err) return res.json(err);
+            return res.json("Student has been updated successfully"); // Fixed typo in message
+        })
+    })
+    
 //connecting with the port number
 app.listen(8000, () => {
    console.log("Server is running on port 800")

@@ -12,7 +12,7 @@ function App() {
         <Router>
           <Routes>
             <Route path='/' element={<StudentsRegister />}></Route>
-            <Route path='/update' element={<UpdateStudent />}></Route>
+            <Route path='/update/:StudentID' element={<UpdateStudent />}></Route>
             <Route path='/add' element={<AddStudents />}></Route>
             <Route path='/delete' element={<DeleteStudent />}></Route>
           </Routes>

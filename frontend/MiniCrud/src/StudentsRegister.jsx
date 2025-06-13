@@ -6,7 +6,7 @@ const StudentsRegister = () => {
     const [students,setStudents] = useState([])
 
     const {StudentID} = useParams()
-    console.log(StudentID)
+   // console.log(StudentID)
 
     useEffect(() => {
         const fetchAllBooks = async () => {
@@ -45,10 +45,11 @@ const StudentsRegister = () => {
                       <p>{item.StudentCourse}</p>
                     <p>{item.StudentEmail}</p> 
                     <button onClick={() => handleDelete(item.StudentID)}>Delete</button>
+                    <button><Link to={`/update/:${item.StudentID}`}>Update</Link></button>
                 </div>
             ))}
         </div>
-        <button><Link to={"/add"}>Add Students</Link></button>
+        <button><Link to={"/add"} className=''>Add Students</Link></button>
     </div>
   )
 }
